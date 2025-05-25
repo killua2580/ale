@@ -1,0 +1,49 @@
+[22:41:48 INF] Application started successfully
+ViewLocator: Looking for view IHECLibrary.Views.WelcomeView for ViewModel IHECLibrary.ViewModels.WelcomeViewModel
+=== MainWindow_Loaded event handler called ===
+ApplicationLifetime is available
+ERROR: Services provider not available
+=== NavigationService.NavigateToAsync() called with viewName: WhoAmI ===
+NavigationService: Creating ViewModel for WhoAmI
+NavigationService: ViewModel created: WhoAmIViewModel
+NavigationService: Raising NavigationRequested event
+=== MainWindowViewModel.OnNavigationRequested() called ===
+Current ViewModel: WelcomeViewModel
+Target ViewModel: WhoAmIViewModel
+ViewLocator: Looking for view IHECLibrary.Views.WhoAmIView for ViewModel IHECLibrary.ViewModels.WhoAmIViewModel
+CurrentViewModel updated to: WhoAmIViewModel
+=== MainWindowViewModel.OnNavigationRequested() completed ===
+=== NavigationService.NavigateToAsync() completed successfully ===
+=== NavigationService.NavigateToAsync() called with viewName: Login ===
+NavigationService: Creating ViewModel for Login
+NavigationService: ViewModel created: LoginViewModel
+NavigationService: Raising NavigationRequested event
+=== MainWindowViewModel.OnNavigationRequested() called ===
+Current ViewModel: WhoAmIViewModel
+Target ViewModel: LoginViewModel
+ViewLocator: Looking for view IHECLibrary.Views.LoginView for ViewModel IHECLibrary.ViewModels.LoginViewModel
+CurrentViewModel updated to: LoginViewModel
+=== MainWindowViewModel.OnNavigationRequested() completed ===
+=== NavigationService.NavigateToAsync() completed successfully ===
+=== LoginViewModel.GoToRegister() called ===
+Attempting to navigate to SimpleRegister view
+=== NavigationService.NavigateToAsync() called with viewName: SimpleRegister ===
+NavigationService: Creating ViewModel for SimpleRegister
+NAVIGATION DEBUG: Attempting to navigate to SimpleRegister
+NAVIGATION DEBUG: Successfully created RegisterViewModel: IHECLibrary.ViewModels.RegisterViewModel
+NavigationService: ViewModel created: RegisterViewModel
+NavigationService: Raising NavigationRequested event
+=== MainWindowViewModel.OnNavigationRequested() called ===
+Current ViewModel: LoginViewModel
+Target ViewModel: RegisterViewModel
+ViewLocator: RegisterViewModel detected, mapping to SimpleRegisterView
+ViewLocator: Looking for view IHECLibrary.Views.SimpleRegisterView for ViewModel IHECLibrary.ViewModels.RegisterViewModel
+=== SimpleRegisterView constructor called ===
+SimpleRegisterView: Loading XAML
+SimpleRegisterView: XAML loaded successfully
+=== SimpleRegisterView initialization completed ===
+SimpleRegisterView DataContext set to: IHECLibrary.ViewModels.RegisterViewModel
+CurrentViewModel updated to: RegisterViewModel
+=== MainWindowViewModel.OnNavigationRequested() completed ===
+=== NavigationService.NavigateToAsync() completed successfully ===
+Navigation to SimpleRegister completed successfully

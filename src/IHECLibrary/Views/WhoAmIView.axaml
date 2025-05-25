@@ -1,0 +1,154 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:IHECLibrary.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="IHECLibrary.Views.WhoAmIView"
+             x:DataType="vm:WhoAmIViewModel">
+
+  <Grid>
+    <!-- Background Image -->
+    <Image Source="/Assets/whoimi.jpg" Stretch="UniformToFill"/>
+    
+    <!-- Overlay for better text readability -->
+    <Border Background="#50000000"/>
+    
+    <!-- Main Content -->
+    <StackPanel HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Spacing="80">
+      
+      <!-- Title -->
+      <StackPanel Spacing="20" HorizontalAlignment="Center">
+        <TextBlock Text="Who am I?"
+                   FontSize="56"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center"/>
+        
+        <TextBlock Text="Choose your role to continue"
+                   FontSize="20"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center"
+                   Opacity="0.9"/>
+      </StackPanel>
+      
+      <!-- Buttons Container -->
+      <StackPanel Orientation="Horizontal" 
+                  Spacing="100"
+                  HorizontalAlignment="Center">
+        
+        <!-- Student Button -->
+        <Border CornerRadius="25"
+                Background="#4A90E2"
+                Width="250"
+                Height="350"
+                BoxShadow="0 10 30 #60000000">
+          <Button Background="Transparent"
+                  BorderThickness="0"
+                  Command="{Binding SelectStudentCommand}"
+                  Width="250"
+                  Height="350"
+                  CornerRadius="25"
+                  Cursor="Hand">
+            <Button.Styles>
+              <Style Selector="Button:pointerover">
+                <Setter Property="Background" Value="#60FFFFFF"/>
+              </Style>
+              <Style Selector="Button:pressed">
+                <Setter Property="Background" Value="#40FFFFFF"/>
+              </Style>
+            </Button.Styles>
+            
+            <StackPanel Spacing="25">
+              <!-- Student Icon -->
+              <Border Width="100" Height="100"
+                      Background="White"
+                      CornerRadius="50"
+                      BoxShadow="0 5 15 #40000000"
+                      Margin="0,30,0,0">
+                <TextBlock Text="🎓"
+                           FontSize="50"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+              </Border>
+              
+              <!-- Student Text -->
+              <TextBlock Text="Student"
+                         FontSize="28"
+                         FontWeight="Bold"
+                         Foreground="White"
+                         HorizontalAlignment="Center"/>
+              
+              <TextBlock Text="Access library resources&#x0a;Browse and borrow books&#x0a;Manage your profile"
+                         FontSize="16"
+                         Foreground="White"
+                         HorizontalAlignment="Center"
+                         TextAlignment="Center"
+                         Opacity="0.95"
+                         LineHeight="22"/>
+            </StackPanel>
+          </Button>
+        </Border>
+        
+        <!-- Administration Button -->
+        <Border CornerRadius="25"
+                Background="#E74C3C"
+                Width="250"
+                Height="350"
+                BoxShadow="0 10 30 #60000000">
+          <Button Background="Transparent"
+                  BorderThickness="0"
+                  Command="{Binding SelectAdminCommand}"
+                  Width="250"
+                  Height="350"
+                  CornerRadius="25"
+                  Cursor="Hand">
+            <Button.Styles>
+              <Style Selector="Button:pointerover">
+                <Setter Property="Background" Value="#60FFFFFF"/>
+              </Style>
+              <Style Selector="Button:pressed">
+                <Setter Property="Background" Value="#40FFFFFF"/>
+              </Style>
+            </Button.Styles>
+            
+            <StackPanel Spacing="25">
+              <!-- Admin Icon -->
+              <Border Width="100" Height="100"
+                      Background="White"
+                      CornerRadius="50"
+                      BoxShadow="0 5 15 #40000000"
+                      Margin="0,30,0,0">
+                <TextBlock Text="⚙️"
+                           FontSize="50"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+              </Border>
+              
+              <!-- Admin Text -->
+              <TextBlock Text="Administration"
+                         FontSize="28"
+                         FontWeight="Bold"
+                         Foreground="White"
+                         HorizontalAlignment="Center"/>
+              
+              <TextBlock Text="Manage library inventory&#x0a;View user activity&#x0a;Oversee system settings"
+                         FontSize="16"
+                         Foreground="White"
+                         HorizontalAlignment="Center"
+                         TextAlignment="Center"
+                         Opacity="0.95"
+                         LineHeight="22"/>
+            </StackPanel>
+          </Button>
+        </Border>
+        
+      </StackPanel>
+      
+    </StackPanel>
+  </Grid>
+</UserControl>

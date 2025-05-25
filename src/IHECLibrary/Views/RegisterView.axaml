@@ -1,0 +1,120 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:IHECLibrary.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             mc:Ignorable="d" d:DesignWidth="1080" d:DesignHeight="720"
+             x:Class="IHECLibrary.Views.RegisterView"
+             x:DataType="vm:RegisterViewModel"
+             FontFamily="'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif">
+
+  <UserControl.Styles>
+    <!-- Modern Input Field Style -->
+    <Style Selector="TextBox.modern-input">
+      <Setter Property="Height" Value="48"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="Background" Value="#F9FAFB"/>
+      <Setter Property="Foreground" Value="#111827"/>
+      <Setter Property="BorderBrush" Value="#E5E7EB"/>
+      <Setter Property="BorderThickness" Value="1.5"/>
+      <Setter Property="Padding" Value="16,12"/>
+      <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!-- Modern Button Style -->
+    <Style Selector="Button.modern-btn">
+      <Setter Property="Height" Value="48"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="Background" Value="#667eea"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- Secondary Button Style -->
+    <Style Selector="Button.secondary-btn">
+      <Setter Property="Height" Value="48"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="FontWeight" Value="Medium"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderBrush" Value="White"/>
+      <Setter Property="BorderThickness" Value="2"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+  </UserControl.Styles>
+
+  <Grid>
+    <!-- Full background image -->
+    <Image Source="avares://IHECLibrary/Assets/bc 1.2.JPG" Stretch="UniformToFill" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    <!-- Scrollable registration card -->
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <Border Width="600" Padding="48,40" CornerRadius="36" Background="#F9DADA" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.85">
+        <Border.Effect>
+          <DropShadowEffect Color="#000000" BlurRadius="18" Opacity="0.10"/>
+        </Border.Effect>
+        <StackPanel Spacing="24">
+          <!-- Title -->
+          <TextBlock Text="Create your account" FontSize="36" FontWeight="Bold" Margin="0,0,0,18" HorizontalAlignment="Center" Foreground="#111"/>
+          <!-- Name fields -->
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Spacing="10">
+              <TextBlock Text="First name" FontWeight="Medium" FontSize="17" Foreground="#111" Margin="0,0,0,4"/>
+              <TextBox Text="{Binding FirstName}" Height="44" FontSize="17" CornerRadius="10" Background="#FFF" Foreground="#111" BorderBrush="#DDD" BorderThickness="1.5" Padding="12,8"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Spacing="10" Margin="18,0,0,0">
+              <TextBlock Text="Last name" FontWeight="Medium" FontSize="17" Foreground="#111" Margin="0,0,0,4"/>
+              <TextBox Text="{Binding LastName}" Height="44" FontSize="17" CornerRadius="10" Background="#FFF" Foreground="#111" BorderBrush="#DDD" BorderThickness="1.5" Padding="12,8"/>
+            </StackPanel>
+          </Grid>
+          <!-- Email -->
+          <StackPanel Spacing="10">
+            <TextBlock Text="Email" FontWeight="Medium" FontSize="17" Foreground="#111" Margin="0,0,0,4"/>
+            <TextBox Text="{Binding Email}" Height="44" FontSize="17" CornerRadius="10" Background="#FFF" Foreground="#111" BorderBrush="#DDD" BorderThickness="1.5" Padding="12,8"/>
+          </StackPanel>
+          <!-- Password -->
+          <StackPanel Spacing="10">
+            <TextBlock Text="Password" FontWeight="Medium" FontSize="17" Foreground="#111" Margin="0,0,0,4"/>
+            <TextBox Text="{Binding Password}" PasswordChar="•" Height="44" FontSize="17" CornerRadius="10" Background="#FFF" Foreground="#111" BorderBrush="#DDD" BorderThickness="1.5" Padding="12,8"/>
+          </StackPanel>
+          <!-- Phone Number -->
+          <StackPanel Spacing="10">
+            <TextBlock Text="Phone Number" FontWeight="Medium" FontSize="17" Foreground="#111" Margin="0,0,0,4"/>
+            <TextBox Text="{Binding PhoneNumber}" Height="44" FontSize="17" CornerRadius="10" Background="#FFF" Foreground="#111" BorderBrush="#DDD" BorderThickness="1.5" Padding="12,8"/>
+          </StackPanel>
+          <!-- Level and Field -->
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Spacing="10">
+              <TextBlock Text="Level of Study" FontWeight="Medium" FontSize="17" Foreground="#111" Margin="0,0,0,4"/>
+              <ComboBox ItemsSource="{Binding LevelOptions}" SelectedItem="{Binding SelectedLevel}" Height="44" FontSize="17" Background="#FFF" Foreground="#111" BorderBrush="#DDD" BorderThickness="1.5" Padding="8,0"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Spacing="10" Margin="18,0,0,0">
+              <TextBlock Text="Field of Study" FontWeight="Medium" FontSize="17" Foreground="#111" Margin="0,0,0,4"/>
+              <ComboBox ItemsSource="{Binding FieldOptions}" SelectedItem="{Binding SelectedField}" Height="44" FontSize="17" Background="#FFF" Foreground="#111" BorderBrush="#DDD" BorderThickness="1.5" Padding="8,0"/>
+            </StackPanel>
+          </Grid>
+          <!-- Terms and error -->
+          <CheckBox Content="I have accepted the terms and conditions" Margin="0,10,0,0" FontSize="15" Foreground="#111"/>
+          <TextBlock Text="{Binding ErrorMessage}" Foreground="#D32F2F" FontWeight="Medium" FontSize="15" HorizontalAlignment="Center" TextWrapping="Wrap" Width="400" IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Margin="0,10,0,0"/>
+          <!-- Create Account button -->
+          <Button Content="Create Account" Command="{Binding RegisterCommand}" Background="#4CAF50" Foreground="#FFF" FontWeight="Bold" FontSize="22" Height="48" CornerRadius="10" HorizontalAlignment="Center" Width="320" Margin="0,18,0,0"/>
+          <!-- Go to login link -->
+          <Button Content="Already have an account? Sign in" Command="{Binding GoToLoginCommand}" Background="Transparent" Foreground="#1A0DAB" FontWeight="Bold" FontSize="16" BorderThickness="0" HorizontalAlignment="Center" Margin="0,10,0,0" Cursor="Hand"/>
+        </StackPanel>
+      </Border>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

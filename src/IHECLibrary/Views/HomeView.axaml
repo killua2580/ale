@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:IHECLibrary.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1080" d:DesignHeight="720"
+             x:Class="IHECLibrary.Views.HomeView"
+             x:DataType="vm:HomeViewModel"
+             FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif">
+  <Grid>
+    <Border Width="520" Padding="48,36" CornerRadius="36" Background="#F9F9F9" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.98">
+      <StackPanel Spacing="24" HorizontalAlignment="Center">
+        <Image Source="avares://IHECLibrary/Assets/7717267.png" Height="100" Width="100" HorizontalAlignment="Center"/>
+        <TextBlock Text="Welcome to IHEC Library" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#222"/>
+        <TextBlock Text="Access your library resources, manage your account, and more." FontSize="18" HorizontalAlignment="Center" Foreground="#555"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="18">
+          <Button Content="Sign In" Command="{Binding GoToLoginCommand}" Background="#7A8B3A" Foreground="#FFF" FontWeight="Bold" FontSize="20" Height="48" Width="160" CornerRadius="12"/>
+          <Button Content="Register" Command="{Binding GoToRegisterCommand}" Background="#A67C52" Foreground="#FFF" FontWeight="Bold" FontSize="20" Height="48" Width="160" CornerRadius="12"/>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+  </Grid>
+</UserControl> 

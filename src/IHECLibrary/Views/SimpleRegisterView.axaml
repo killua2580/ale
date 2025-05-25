@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:IHECLibrary.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="IHECLibrary.Views.SimpleRegisterView"
+             x:DataType="vm:RegisterViewModel"
+             FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif">
+
+  <Grid Background="#FFF9E3">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
+      <TextBlock Text="Simple Registration Page" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+      
+      <StackPanel Width="300" Spacing="10">
+        <!-- First Name -->
+        <TextBlock Text="First Name" FontWeight="Medium"/>
+        <TextBox Text="{Binding FirstName}" Background="#F0F0F0"/>
+        
+        <!-- Last Name -->
+        <TextBlock Text="Last Name" FontWeight="Medium"/>
+        <TextBox Text="{Binding LastName}" Background="#F0F0F0"/>
+        
+        <!-- Email -->
+        <TextBlock Text="Email" FontWeight="Medium"/>
+        <TextBox Text="{Binding Email}" Background="#F0F0F0"/>
+        
+        <!-- Password -->
+        <TextBlock Text="Password" FontWeight="Medium"/>
+        <TextBox Text="{Binding Password}" PasswordChar="•" Background="#F0F0F0"/>
+        
+        <!-- Phone Number -->
+        <TextBlock Text="Phone Number" FontWeight="Medium"/>
+        <TextBox Text="{Binding PhoneNumber}" Background="#F0F0F0"/>
+
+        <!-- Level -->
+        <TextBlock Text="Level" FontWeight="Medium"/>
+        <ComboBox ItemsSource="{Binding LevelOptions}" SelectedItem="{Binding SelectedLevel}" HorizontalAlignment="Stretch"/>
+        
+        <!-- Field -->
+        <TextBlock Text="Field" FontWeight="Medium"/>
+        <ComboBox ItemsSource="{Binding FieldOptions}" SelectedItem="{Binding SelectedField}" HorizontalAlignment="Stretch"/>
+      </StackPanel>
+      
+      <!-- Error message -->
+      <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap" IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+      
+      <!-- Register button -->
+      <Button Content="Create Account" Command="{Binding RegisterCommand}" HorizontalAlignment="Center" Background="#4CAF50" Foreground="White"/>
+      
+      <!-- Go to Login Button -->
+      <Button Content="Back to Login" Command="{Binding GoToLoginCommand}" HorizontalAlignment="Center" Background="Transparent"/>
+    </StackPanel>
+  </Grid>
+</UserControl>

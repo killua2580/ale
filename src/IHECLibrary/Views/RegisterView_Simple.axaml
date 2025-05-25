@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:IHECLibrary.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="IHECLibrary.Views.RegisterViewSimple"
+             x:DataType="vm:RegisterViewModel">
+
+  <Grid Background="#E8F4FD">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20" Width="400">
+      <TextBlock Text="Register - Styled Version" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+      
+      <!-- First Name -->
+      <StackPanel Spacing="5">
+        <TextBlock Text="First Name" FontWeight="Medium"/>
+        <TextBox Text="{Binding FirstName}" Height="40" Padding="10"/>
+      </StackPanel>
+      
+      <!-- Last Name -->
+      <StackPanel Spacing="5">
+        <TextBlock Text="Last Name" FontWeight="Medium"/>
+        <TextBox Text="{Binding LastName}" Height="40" Padding="10"/>
+      </StackPanel>
+      
+      <!-- Email -->
+      <StackPanel Spacing="5">
+        <TextBlock Text="Email" FontWeight="Medium"/>
+        <TextBox Text="{Binding Email}" Height="40" Padding="10"/>
+      </StackPanel>
+      
+      <!-- Password -->
+      <StackPanel Spacing="5">
+        <TextBlock Text="Password" FontWeight="Medium"/>
+        <TextBox Text="{Binding Password}" PasswordChar="•" Height="40" Padding="10"/>
+      </StackPanel>
+      
+      <!-- Buttons -->
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="15" Margin="0,20,0,0">
+        <Button Content="Register" Command="{Binding RegisterCommand}" 
+                Background="#4CAF50" Foreground="White" 
+                Height="45" Width="120" CornerRadius="5"/>
+        <Button Content="Back to Login" Command="{Binding GoToLoginCommand}" 
+                Background="#2196F3" Foreground="White" 
+                Height="45" Width="120" CornerRadius="5"/>
+      </StackPanel>
+    </StackPanel>
+  </Grid>
+</UserControl>

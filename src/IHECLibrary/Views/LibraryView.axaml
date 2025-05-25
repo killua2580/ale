@@ -1,0 +1,171 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:IHECLibrary.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+             x:Class="IHECLibrary.Views.LibraryView"
+             x:DataType="vm:LibraryViewModel"
+             FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif">
+
+  <Grid Background="#FFF9E3">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <!-- Navigation bar -->
+    <Grid Grid.Row="0" Background="#FFF9E3" Height="70">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <!-- Logo and title -->
+      <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+        <TextBlock Text="IHEC CARTHAGE Library" FontSize="24" FontWeight="Bold" Foreground="#222"/>
+      </StackPanel>
+      <!-- Navigation menu -->
+      <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button Content="Home" Command="{Binding NavigateToHomeCommand}" 
+                Background="#FFF9E3" Foreground="#222" 
+                Padding="15,10" Margin="5,0" CornerRadius="20" FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif"/>
+        <Button Content="Library" Command="{Binding NavigateToLibraryCommand}" 
+                Background="#A67C52" Foreground="#FFF9E3" 
+                Padding="15,10" Margin="5,0" CornerRadius="20" FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif"/>
+        <Button Content="Profile" Command="{Binding NavigateToProfileCommand}" 
+                Background="Transparent" Foreground="#222" 
+                Padding="15,10" Margin="5,0" CornerRadius="20" FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif"/>
+      </StackPanel>
+      <!-- Search and profile -->
+      <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,20,0">
+        <Border CornerRadius="15" Padding="10,7,10,7" Background="#FFFDF8" Margin="0,0,10,0">
+          <TextBox Text="{Binding SearchQuery}" Watermark="Search books..." Width="200" 
+                 BorderThickness="0" Background="Transparent" Foreground="#222" FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif"/>
+        </Border>
+        <Grid Margin="5,0,0,0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+          <Border Grid.Column="0" CornerRadius="50" Width="32" Height="32" ClipToBounds="True" 
+                  Margin="0,0,8,0" Background="#FFFDF8">
+            <Image Source="{Binding UserProfilePicture}" Stretch="UniformToFill"/>
+          </Border>
+          <TextBlock Grid.Column="1" Text="{Binding UserFullName}" VerticalAlignment="Center" 
+                     FontSize="13" FontWeight="SemiBold" Foreground="#222" FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif"/>
+        </Grid>
+      </StackPanel>
+    </Grid>
+    <!-- Main Content -->
+    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,30,0,0" HorizontalAlignment="Stretch">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <!-- Top bar: Search, Filters, and Sort -->
+      <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center" Spacing="16" Margin="40,0,40,18">
+        <TextBlock Text="All Books" FontSize="22" FontWeight="Bold" Foreground="#222" VerticalAlignment="Center" Margin="0,0,18,0"/>
+        <Border CornerRadius="15" Padding="10,7,10,7" Background="#FFFDF8" Margin="0,0,10,0">
+          <TextBox Text="{Binding SearchQuery}" Watermark="Search books..." Width="220" BorderThickness="0" Background="Transparent" Foreground="#222"/>
+        </Border>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="6">
+          <TextBlock Text="Sort by:" VerticalAlignment="Center" Foreground="#A67C52" FontSize="13"/>
+          <ComboBox SelectedItem="{Binding SelectedSortOption}" ItemsSource="{Binding SortOptions}" Width="140">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="sys:String">
+                <TextBlock Text="{Binding}"/>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </StackPanel>
+      </StackPanel>
+      <!-- Book grid -->
+      <ScrollViewer Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Margin="40,0,40,0">
+        <Panel>
+          <ItemsControl ItemsSource="{Binding Books}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="vm:BookViewModel">
+                <Border Width="180" Height="220" Margin="0,0,18,18" CornerRadius="14" Background="#FFFDF8" BorderBrush="#E6D3B3" BorderThickness="1">
+                  <StackPanel>
+                    <Image Source="/Assets/book_cover_placeholder.png" Width="70" Height="70" Stretch="Uniform" HorizontalAlignment="Center" Margin="0,14,0,0"/>
+                    <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="14" TextAlignment="Center" Margin="8,10,8,0" Foreground="#222"/>
+                    <TextBlock Text="{Binding Author}" FontSize="12" Foreground="#A67C52" TextAlignment="Center"/>
+                    <Button Content="View Details" Command="{Binding ActionCommand}" Background="#A67C52" Foreground="#FFF9E3" Padding="8,2" CornerRadius="8" Margin="0,10,0,0"/>
+                  </StackPanel>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <!-- Loading overlay -->
+          <Border Background="#80FFFFFF" IsVisible="{Binding IsLoading}">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+              <ProgressBar IsIndeterminate="True" Width="100" Height="4" Margin="0,0,0,10"/>
+              <TextBlock Text="Loading books..." FontSize="14" HorizontalAlignment="Center"/>
+            </StackPanel>
+          </Border>
+        </Panel>
+      </ScrollViewer>
+      <!-- Pagination controls -->
+      <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0" Spacing="8">
+        <Button Content="&lt;" Command="{Binding PreviousPageCommand}" IsEnabled="{Binding HasPreviousPage}" Background="#E6D3B3" Foreground="#A67C52" Padding="8,2" CornerRadius="8"/>
+        <TextBlock Text="{Binding CurrentPage, StringFormat='Page {0} of {1}'}" Foreground="#A67C52" FontSize="13" VerticalAlignment="Center">
+          <TextBlock.Text>
+            <MultiBinding StringFormat="Page {0} of {1}">
+              <Binding Path="CurrentPage" />
+              <Binding Path="TotalPages" />
+            </MultiBinding>
+          </TextBlock.Text>
+        </TextBlock>
+        <Button Content="&gt;" Command="{Binding NextPageCommand}" IsEnabled="{Binding HasNextPage}" Background="#E6D3B3" Foreground="#A67C52" Padding="8,2" CornerRadius="8"/>
+        <Button Content="⟳" Command="{Binding RefreshBooksCommand}" Background="#4CAF50" Foreground="White" Padding="8,2" CornerRadius="8"/>
+      </StackPanel>
+      <!-- Filters Panel at the bottom -->
+      <Border Grid.Row="3" Grid.ColumnSpan="2" Background="#FFFDF8" CornerRadius="18" Padding="24" Margin="0,40,0,24" HorizontalAlignment="Stretch">
+        <Grid ColumnDefinitions="*,*,*,auto" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+          <!-- Categories -->
+          <StackPanel Grid.Column="0" Spacing="8">
+            <TextBlock Text="Categories" FontWeight="SemiBold" Foreground="#A67C52" FontSize="15"/>
+            <ItemsControl ItemsSource="{Binding Categories}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:CategoryViewModel">
+                  <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected}" Foreground="#A67C52" FontSize="13" Margin="0,2,0,0"/>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+          <!-- Availability -->
+          <StackPanel Grid.Column="1" Spacing="8" HorizontalAlignment="Center">
+            <TextBlock Text="Availability" FontWeight="SemiBold" Foreground="#A67C52" FontSize="15"/>
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <RadioButton Content="Available" IsChecked="{Binding IsAvailableOnly}" GroupName="Availability" Foreground="#A67C52" FontSize="13"/>
+              <RadioButton Content="All" IsChecked="{Binding !IsAvailableOnly}" GroupName="Availability" Foreground="#A67C52" FontSize="13"/>
+            </StackPanel>
+          </StackPanel>
+          <!-- Language -->
+          <StackPanel Grid.Column="2" Spacing="8" HorizontalAlignment="Center">
+            <TextBlock Text="Language" FontWeight="SemiBold" Foreground="#A67C52" FontSize="15"/>
+            <ItemsControl ItemsSource="{Binding Languages}">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:LanguageViewModel">
+                  <RadioButton Content="{Binding Name}" IsChecked="{Binding IsSelected}" GroupName="Language" Foreground="#A67C52" FontSize="13" Margin="0,2,0,0"/>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+          <!-- Apply Filters Button -->
+          <StackPanel Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button Content="Apply Filters" Command="{Binding ApplyFiltersCommand}"
+                    Background="#A67C52" Foreground="#FFF9E3" Padding="14,6" CornerRadius="8" Margin="24,0,0,0"/>
+          </StackPanel>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
+</UserControl>

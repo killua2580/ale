@@ -1,0 +1,184 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Modern Input Field Style -->
+  <Style Selector="TextBox.modern-input">
+    <Setter Property="Height" Value="48"/>
+    <Setter Property="FontSize" Value="16"/>
+    <Setter Property="CornerRadius" Value="12"/>
+    <Setter Property="Background" Value="#F9FAFB"/>
+    <Setter Property="Foreground" Value="#111827"/>
+    <Setter Property="BorderBrush" Value="#E5E7EB"/>
+    <Setter Property="BorderThickness" Value="1.5"/>
+    <Setter Property="Padding" Value="16,12"/>
+    <Setter Property="FontWeight" Value="Regular"/>
+    <Setter Property="Transitions">
+      <Transitions>
+        <BrushTransition Property="Background" Duration="0:0:0.2"/>
+        <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+        <ThicknessTransition Property="BorderThickness" Duration="0:0:0.2"/>
+      </Transitions>
+    </Setter>
+  </Style>
+
+  <!-- Hover state for modern input -->
+  <Style Selector="TextBox.modern-input:pointerover /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="#FFFFFF"/>
+    <Setter Property="BorderBrush" Value="#667eea"/>
+    <Setter Property="BorderThickness" Value="2"/>
+  </Style>
+
+  <!-- Focus state for modern input -->
+  <Style Selector="TextBox.modern-input:focus /template/ Border#PART_BorderElement">
+    <Setter Property="Background" Value="#FFFFFF"/>
+    <Setter Property="BorderBrush" Value="#667eea"/>
+    <Setter Property="BorderThickness" Value="2"/>
+  </Style>
+
+  <!-- Modern ComboBox Style -->
+  <Style Selector="ComboBox.modern-select">
+    <Setter Property="Height" Value="48"/>
+    <Setter Property="FontSize" Value="16"/>
+    <Setter Property="CornerRadius" Value="12"/>
+    <Setter Property="Background" Value="#F9FAFB"/>
+    <Setter Property="Foreground" Value="#111827"/>
+    <Setter Property="BorderBrush" Value="#E5E7EB"/>
+    <Setter Property="BorderThickness" Value="1.5"/>
+    <Setter Property="Padding" Value="16,12"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="Transitions">
+      <Transitions>
+        <BrushTransition Property="Background" Duration="0:0:0.2"/>
+        <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+      </Transitions>
+    </Setter>
+  </Style>
+
+  <!-- Hover state for modern select -->
+  <Style Selector="ComboBox.modern-select:pointerover /template/ Border#Background">
+    <Setter Property="Background" Value="#FFFFFF"/>
+    <Setter Property="BorderBrush" Value="#667eea"/>
+  </Style>
+
+  <!-- Modern Label Style -->
+  <Style Selector="TextBlock.field-label">
+    <Setter Property="FontWeight" Value="Medium"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="Foreground" Value="#374151"/>
+    <Setter Property="Margin" Value="4,0"/>
+  </Style>
+
+  <!-- Section Header Style -->
+  <Style Selector="TextBlock.section-header">
+    <Setter Property="FontSize" Value="18"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Foreground" Value="#333333"/>
+    <Setter Property="Margin" Value="0,8,0,8"/>
+  </Style>
+
+  <!-- Gradient Button Style -->
+  <Style Selector="Button.gradient-button">
+    <Setter Property="Height" Value="52"/>
+    <Setter Property="CornerRadius" Value="14"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="FontSize" Value="16"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="Background">
+      <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Offset="0" Color="#667eea"/>
+        <GradientStop Offset="1" Color="#764ba2"/>
+      </LinearGradientBrush>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border CornerRadius="{TemplateBinding CornerRadius}" 
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+          <Border.Effect>
+            <DropShadowEffect Color="#667eea" BlurRadius="20" Opacity="0.3" OffsetY="4"/>
+          </Border.Effect>
+          <Border.Transitions>
+            <Transitions>
+              <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2"/>
+            </Transitions>
+          </Border.Transitions>
+          <ContentPresenter Content="{TemplateBinding Content}" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <!-- Hover effect for gradient button -->
+  <Style Selector="Button.gradient-button:pointerover /template/ Border">
+    <Setter Property="RenderTransform" Value="scale(1.02)"/>
+  </Style>
+
+  <!-- Press effect for gradient button -->
+  <Style Selector="Button.gradient-button:pressed /template/ Border">
+    <Setter Property="RenderTransform" Value="scale(0.98)"/>
+  </Style>
+
+  <!-- Secondary Button Style -->
+  <Style Selector="Button.secondary-button">
+    <Setter Property="Height" Value="48"/>
+    <Setter Property="CornerRadius" Value="12"/>
+    <Setter Property="Background" Value="White"/>
+    <Setter Property="BorderBrush" Value="#E5E7EB"/>
+    <Setter Property="BorderThickness" Value="1.5"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="Transitions">
+      <Transitions>
+        <BrushTransition Property="Background" Duration="0:0:0.2"/>
+        <BrushTransition Property="BorderBrush" Duration="0:0:0.2"/>
+      </Transitions>
+    </Setter>
+  </Style>
+
+  <!-- Hover effect for secondary button -->
+  <Style Selector="Button.secondary-button:pointerover">
+    <Setter Property="Background" Value="#F9FAFB"/>
+    <Setter Property="BorderBrush" Value="#D1D5DB"/>
+  </Style>
+
+  <!-- Error Message Style -->
+  <Style Selector="Border.error-message">
+    <Setter Property="Background" Value="#FEF2F2"/>
+    <Setter Property="BorderBrush" Value="#FECACA"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="12"/>
+    <Setter Property="Padding" Value="16"/>
+  </Style>
+
+  <!-- Terms Border Style -->
+  <Style Selector="Border.terms-border">
+    <Setter Property="Background" Value="#F8FAFC"/>
+    <Setter Property="CornerRadius" Value="12"/>
+    <Setter Property="Padding" Value="16"/>
+    <Setter Property="BorderBrush" Value="#E2E8F0"/>
+    <Setter Property="BorderThickness" Value="1"/>
+  </Style>
+
+  <!-- Card Animation -->
+  <Style Selector="Border.main-card">
+    <Setter Property="Transitions">
+      <Transitions>
+        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.3"/>
+      </Transitions>
+    </Setter>
+  </Style>
+
+  <!-- Loading Animation -->
+  <Style Selector="TextBlock.loading-text">
+    <Setter Property="Opacity" Value="1"/>
+    <Setter Property="Transitions">
+      <Transitions>
+        <DoubleTransition Property="Opacity" Duration="0:0:0.5"/>
+      </Transitions>
+    </Setter>
+  </Style>
+
+</Styles>

@@ -1,0 +1,327 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:IHECLibrary.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             mc:Ignorable="d" d:DesignWidth="1080" d:DesignHeight="720"
+             x:Class="IHECLibrary.Views.RegisterView"
+             x:DataType="vm:RegisterViewModel"
+             FontFamily="'Inter', 'Segoe UI', 'San Francisco', -apple-system, BlinkMacSystemFont, sans-serif">
+
+  <UserControl.Styles>
+    <!-- Modern Input Field Style -->
+    <Style Selector="TextBox.modern-input">
+      <Setter Property="Height" Value="48"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="Background" Value="#F9FAFB"/>
+      <Setter Property="Foreground" Value="#111827"/>
+      <Setter Property="BorderBrush" Value="#E5E7EB"/>
+      <Setter Property="BorderThickness" Value="1.5"/>
+      <Setter Property="Padding" Value="16,12"/>
+      <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!-- Modern Button Style -->
+    <Style Selector="Button.modern-btn">
+      <Setter Property="Height" Value="48"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="Background" Value="#667eea"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- Secondary Button Style -->
+    <Style Selector="Button.secondary-btn">
+      <Setter Property="Height" Value="48"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="FontWeight" Value="Medium"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderBrush" Value="White"/>
+      <Setter Property="BorderThickness" Value="2"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+  </UserControl.Styles>
+
+  <Grid>
+    <!-- Dynamic Gradient Background -->
+    <Rectangle>
+      <Rectangle.Fill>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+          <GradientStop Offset="0" Color="#667eea"/>
+          <GradientStop Offset="0.5" Color="#764ba2"/>
+          <GradientStop Offset="1" Color="#f093fb"/>
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+    </Rectangle>
+    
+    <!-- Subtle overlay pattern -->
+    <Rectangle Opacity="0.1">
+      <Rectangle.Fill>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+          <GradientStop Offset="0" Color="White"/>
+          <GradientStop Offset="0.3" Color="Transparent"/>
+          <GradientStop Offset="0.7" Color="Transparent"/>
+          <GradientStop Offset="1" Color="White"/>
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+    </Rectangle>
+
+    <!-- Main Content Grid -->
+    <Grid>
+      <!-- Floating IHEC Logo -->
+      <Border Width="80" Height="80" CornerRadius="40" 
+              Background="White" 
+              VerticalAlignment="Top" 
+              HorizontalAlignment="Left" 
+              Margin="40,40,0,0">
+        <Border.Effect>
+          <DropShadowEffect Color="#000000" BlurRadius="20" Opacity="0.15" OffsetX="0" OffsetY="4"/>
+        </Border.Effect>
+        <Image Source="/src/IHECLibrary/Assets/7717267.png" 
+               Width="50" Height="50" 
+               VerticalAlignment="Center" 
+               HorizontalAlignment="Center"/>
+      </Border>
+
+      <!-- Main Registration Card -->
+      <Border Width="580" 
+              Padding="50,45" 
+              CornerRadius="28" 
+              Background="#FFFFFF" 
+              HorizontalAlignment="Center" 
+              VerticalAlignment="Center"
+              Margin="0,20,0,0"
+              Classes="main-card">
+        <Border.Effect>
+          <DropShadowEffect Color="#000000" BlurRadius="40" Opacity="0.12" OffsetX="0" OffsetY="8"/>
+        </Border.Effect>
+        
+        <ScrollViewer>
+          <StackPanel Spacing="28">
+            <!-- Header Section -->
+            <StackPanel Spacing="8" HorizontalAlignment="Center">
+              <TextBlock Text="Join IHEC Library" 
+                         FontSize="32" 
+                         FontWeight="Bold" 
+                         HorizontalAlignment="Center" 
+                         Foreground="#1a1a1a"/>
+              <TextBlock Text="Create your account to access thousands of books" 
+                         FontSize="16" 
+                         HorizontalAlignment="Center" 
+                         Foreground="#666666" 
+                         FontWeight="Medium"/>
+            </StackPanel>
+
+              <!-- Personal Information Section -->
+            <StackPanel Spacing="20">
+              <TextBlock Text="Personal Information" 
+                         Classes="section-header"/>
+              
+              <!-- Name Fields -->
+              <Grid ColumnDefinitions="*,16,*">
+                <StackPanel Grid.Column="0" Spacing="8">
+                  <TextBlock Text="First Name" 
+                             Classes="field-label"/>
+                  <TextBox Text="{Binding FirstName}" 
+                           Classes="modern-input"
+                           Watermark="Enter your first name"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="2" Spacing="8">
+                  <TextBlock Text="Last Name" 
+                             Classes="field-label"/>
+                  <TextBox Text="{Binding LastName}" 
+                           Classes="modern-input"
+                           Watermark="Enter your last name"/>
+                </StackPanel>
+              </Grid>
+
+              <!-- Email Field -->
+              <StackPanel Spacing="8">
+                <TextBlock Text="Email Address" 
+                           Classes="field-label"/>
+                <TextBox Text="{Binding Email}" 
+                         Classes="modern-input"
+                         Watermark="your.name@ihec.ucar.tn"/>
+              </StackPanel>
+
+              <!-- Phone Field -->
+              <StackPanel Spacing="8">
+                <TextBlock Text="Phone Number" 
+                           Classes="field-label"/>
+                <Grid ColumnDefinitions="Auto,*">
+                  <Border Grid.Column="0" 
+                          Background="#F3F4F6" 
+                          CornerRadius="12,0,0,12" 
+                          BorderBrush="#E5E7EB" 
+                          BorderThickness="1.5,1.5,0,1.5" 
+                          Height="48">
+                    <TextBlock Text="+216" 
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Center" 
+                               Margin="16,0" 
+                               FontWeight="Medium" 
+                               Foreground="#6B7280"/>
+                  </Border>
+                  <TextBox Grid.Column="1" 
+                           Text="{Binding PhoneNumber}" 
+                           Height="48" 
+                           FontSize="16" 
+                           CornerRadius="0,12,12,0" 
+                           Background="#F9FAFB" 
+                           Foreground="#111827" 
+                           BorderBrush="#E5E7EB" 
+                           BorderThickness="0,1.5,1.5,1.5" 
+                           Padding="12,12,16,12"
+                           Watermark="XX XXX XXX"/>
+                </Grid>
+              </StackPanel>
+
+              <!-- Password Field -->
+              <StackPanel Spacing="8">
+                <TextBlock Text="Password" 
+                           Classes="field-label"/>
+                <TextBox Text="{Binding Password}" 
+                         PasswordChar="●" 
+                         Classes="modern-input"
+                         Watermark="Create a strong password"/>
+              </StackPanel>
+            </StackPanel>
+
+            <!-- Academic Information Section -->
+            <StackPanel Spacing="20">
+              <TextBlock Text="Academic Information" 
+                         Classes="section-header"/>
+              
+              <!-- Level and Field -->
+              <Grid ColumnDefinitions="*,16,*">
+                <StackPanel Grid.Column="0" Spacing="8">
+                  <TextBlock Text="Level of Study" 
+                             Classes="field-label"/>
+                  <ComboBox ItemsSource="{Binding LevelOptions}" 
+                            SelectedItem="{Binding SelectedLevel}" 
+                            Classes="modern-select"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="2" Spacing="8">
+                  <TextBlock Text="Field of Study" 
+                             Classes="field-label"/>
+                  <ComboBox ItemsSource="{Binding FieldOptions}" 
+                            SelectedItem="{Binding SelectedField}" 
+                            Classes="modern-select"/>
+                </StackPanel>
+              </Grid>
+            </StackPanel>
+
+            <!-- Terms and Conditions -->
+            <Border Classes="terms-border">
+              <CheckBox Content="I agree to the Terms of Service and Privacy Policy" 
+                        FontSize="14" 
+                        Foreground="#4A5568" 
+                        FontWeight="Medium"/>
+            </Border>
+
+            <!-- Error Message -->
+            <Border IsVisible="{Binding ErrorMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                    Classes="error-message">
+              <TextBlock Text="{Binding ErrorMessage}" 
+                         Foreground="#DC2626" 
+                         FontWeight="Medium" 
+                         FontSize="14" 
+                         HorizontalAlignment="Center" 
+                         TextWrapping="Wrap"/>
+            </Border>
+
+            <!-- Action Buttons -->
+            <StackPanel Spacing="16">
+              <!-- Primary Register Button -->
+              <Button Command="{Binding RegisterCommand}" 
+                      Classes="gradient-button"
+                      IsEnabled="{Binding !IsLoading}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <TextBlock Text="Create Account" 
+                             Foreground="White" 
+                             FontWeight="SemiBold" 
+                             FontSize="16" 
+                             Classes="loading-text"
+                             IsVisible="{Binding !IsLoading}"/>
+                  <TextBlock Text="Creating Account..." 
+                             Foreground="White" 
+                             FontWeight="SemiBold" 
+                             FontSize="16" 
+                             Classes="loading-text"
+                             IsVisible="{Binding IsLoading}"/>
+                </StackPanel>
+              </Button>
+
+              <!-- Divider -->
+              <Grid ColumnDefinitions="*,Auto,*" Margin="0,8">
+                <Rectangle Grid.Column="0" 
+                           Height="1" 
+                           Fill="#E5E7EB" 
+                           VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" 
+                           Text="or" 
+                           Margin="16,0" 
+                           FontSize="14" 
+                           Foreground="#9CA3AF"/>
+                <Rectangle Grid.Column="2" 
+                           Height="1" 
+                           Fill="#E5E7EB" 
+                           VerticalAlignment="Center"/>
+              </Grid>
+
+              <!-- Google Sign In Button -->
+              <Button Command="{Binding GoogleSignInCommand}" 
+                      Classes="secondary-button"
+                      IsEnabled="{Binding !IsLoading}">
+                <StackPanel Orientation="Horizontal" Spacing="12">
+                  <Border Width="20" Height="20" Background="#4285f4" CornerRadius="2">
+                    <TextBlock Text="G" 
+                               Foreground="White" 
+                               FontWeight="Bold" 
+                               FontSize="12" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"/>
+                  </Border>
+                  <TextBlock Text="Continue with Google" 
+                             FontSize="14" 
+                             FontWeight="Medium" 
+                             Foreground="#374151"/>
+                </StackPanel>
+              </Button>
+
+              <!-- Login Link -->
+              <StackPanel Orientation="Horizontal" 
+                          HorizontalAlignment="Center" 
+                          Spacing="4" 
+                          Margin="0,12,0,0">
+                <TextBlock Text="Already have an account?" 
+                           FontSize="14" 
+                           Foreground="#6B7280"/>
+                <Button Command="{Binding GoToLoginCommand}" 
+                        Background="Transparent" 
+                        BorderThickness="0" 
+                        Padding="4,0"
+                        VerticalAlignment="Center">
+                  <TextBlock Text="Sign in" 
+                             FontSize="14" 
+                             FontWeight="SemiBold" 
+                             Foreground="#667eea" 
+                             TextDecorations="Underline"/>
+                </Button>
+              </StackPanel>
+            </StackPanel>
+          </StackPanel>
+        </ScrollViewer>
+      </Border>
+    </Grid>
+  </Grid>
+</UserControl>

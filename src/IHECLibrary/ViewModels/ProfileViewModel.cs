@@ -212,12 +212,6 @@ namespace IHECLibrary.ViewModels
         
         // Navigation commands remain unchanged
         [RelayCommand]
-        private async Task NavigateToHome()
-        {
-            await _navigationService.NavigateToAsync("Home");
-        }
-
-        [RelayCommand]
         private async Task NavigateToLibrary()
         {
             await _navigationService.NavigateToAsync("Library");
@@ -324,6 +318,12 @@ namespace IHECLibrary.ViewModels
                     break;
                 }
             }
+        }
+
+        [RelayCommand]
+        private async Task NavigateToHome()
+        {
+            await _navigationService.NavigateToAsync("Home");
         }
     }
 

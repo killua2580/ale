@@ -298,12 +298,6 @@ namespace IHECLibrary.ViewModels
         }
 
         [RelayCommand]
-        private async Task NavigateToHome()
-        {
-            await _navigationService.NavigateToAsync("Home");
-        }
-
-        [RelayCommand]
         private async Task NavigateToLibrary()
         {
             await _navigationService.NavigateToAsync("Library");

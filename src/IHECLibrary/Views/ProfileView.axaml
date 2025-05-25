@@ -30,7 +30,7 @@
       <!-- Menu de navigation -->
       <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Button Content="Home" Command="{Binding NavigateToHomeCommand}" 
-                Background="#FFF9E3" Foreground="#222" 
+                Background="#A67C52" Foreground="#FFF9E3" 
                 Padding="15,10" Margin="5,0" CornerRadius="20" FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif"/>
         <Button Content="Library" Command="{Binding NavigateToLibraryCommand}" 
                 Background="Transparent" Foreground="#222" 
@@ -65,9 +65,9 @@
     <!-- Contenu principal -->
     <Grid Grid.Row="1">
       <!-- Background Image -->
-      <Image Source="/Assets/494817085_713923567745718_6233380849069892885_n.jpg" 
+      <!-- <Image Source="/Assets/494817085_713923567745718_6233380849069892885_n.jpg" 
              Stretch="UniformToFill" 
-             Opacity="0.18"/>
+             Opacity="0.18"/> -->
       
       <!-- Error message display -->
       <Border Background="#FFEBEE" CornerRadius="8" Padding="30" IsVisible="{Binding HasError}" Margin="50">

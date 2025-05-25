@@ -270,12 +270,6 @@ namespace IHECLibrary.ViewModels
         }
 
         [RelayCommand]
-        private async Task NavigateToHome()
-        {
-            await _navigationService.NavigateToAsync("Home");
-        }
-
-        [RelayCommand]
         private Task NavigateToLibrary()
         {
             // Déjà sur la page de bibliothèque, ne rien faire
@@ -338,6 +332,12 @@ namespace IHECLibrary.ViewModels
             CurrentPage = 1;
             LoadBooks();
             return Task.CompletedTask;
+        }
+
+        [RelayCommand]
+        private async Task NavigateToHome()
+        {
+            await _navigationService.NavigateToAsync("Home");
         }
     }
 

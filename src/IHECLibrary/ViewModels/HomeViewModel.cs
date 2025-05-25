@@ -1,124 +1,145 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using IHECLibrary.Services;
-using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using IHECLibrary; // Corrected namespace for BookModel
-using System.Windows.Input;
+using System;
+using System.Collections.Generic;
 
 namespace IHECLibrary.ViewModels
 {
     public partial class HomeViewModel : ViewModelBase
     {
         [ObservableProperty]
-        private string _welcomeMessage = string.Empty;
+        private string _userName = "Student";
 
         [ObservableProperty]
-        private string _recommendationSubtitle = string.Empty;
+        private ObservableCollection<BookViewModel> _books = new();
+
+        [ObservableProperty]
+        private bool _isLoading = false;
+
+        [ObservableProperty]
+        private string _errorMessage = string.Empty;
 
         [ObservableProperty]
         private string _searchQuery = string.Empty;
 
         [ObservableProperty]
-        private string _userFullName = string.Empty;
+        private ObservableCollection<string> _categories = new();
 
         [ObservableProperty]
-        private string _userProfilePicture = string.Empty;
+        private string _selectedCategory = string.Empty;
 
-        [ObservableProperty]
-        private ObservableCollection<BookViewModel> _recommendedBooks = new();
-
-        [ObservableProperty]
-        private ObservableCollection<BookViewModel> _popularBooks = new();
-
-        private readonly INavigationService _navigationService;
-        private readonly IBookService _bookService;
         private readonly IUserService _userService;
+        private readonly IBookService _bookService;
+        private readonly INavigationService _navigationService;
 
-        public ICommand GoToLoginCommand { get; }
-        public ICommand GoToRegisterCommand { get; }
-
-        public HomeViewModel(INavigationService navigationService, IBookService bookService, IUserService userService)
+        public HomeViewModel(IUserService userService, IBookService bookService, INavigationService navigationService)
         {
-            _navigationService = navigationService;
-            _bookService = bookService;
             _userService = userService;
-
-            GoToLoginCommand = new RelayCommand(async () => await _navigationService.NavigateToAsync("Login"));
-            GoToRegisterCommand = new RelayCommand(async () => await _navigationService.NavigateToAsync("Register"));
-
-            LoadUserData();
-            LoadRecommendedBooks();
-            LoadPopularBooks();
+            _bookService = bookService;
+            _navigationService = navigationService;
+            LoadData();
         }
 
-        private async void LoadUserData()
+        private async void LoadData()
         {
-            var user = await _userService.GetCurrentUserAsync();
-            if (user != null)
+            IsLoading = true;
+            ErrorMessage = string.Empty;
+            try
             {
-                UserFullName = $"{user.FirstName} {user.LastName}";
-                UserProfilePicture = user.ProfilePictureUrl ?? "/Assets/default_profile.png";
-                WelcomeMessage = $"Welcome back, {user.FirstName}!";
-                RecommendationSubtitle = $"Here are some recommendations for your {user.FieldOfStudy} studies";
+                var user = await _userService.GetCurrentUserAsync();
+                if (user != null && !string.IsNullOrWhiteSpace(user.FirstName))
+                    UserName = user.FirstName;
+                else
+                    UserName = "Student";
+
+                var books = await _bookService.GetRealBooksAsync(1, 100, null, null);
+                Books.Clear();
+                var categorySet = new HashSet<string>();
+                foreach (var book in books)
+                {
+                    Books.Add(new BookViewModel(book, _bookService, _navigationService));
+                    if (!string.IsNullOrWhiteSpace(book.Category))
+                        categorySet.Add(book.Category);
+                }
+                Categories.Clear();
+                Categories.Add("All");
+                foreach (var cat in categorySet)
+                    Categories.Add(cat);
+                SelectedCategory = "All";
             }
-        }
-
-        private async void LoadRecommendedBooks()
-        {
-            var books = await _bookService.GetRecommendedBooksAsync();
-            RecommendedBooks.Clear();
-            foreach (var book in books)
+            catch (Exception ex)
             {
-                RecommendedBooks.Add(new BookViewModel(book, _bookService, _navigationService));
+                ErrorMessage = $"Failed to load data: {ex.Message}";
             }
-        }
-
-        private async void LoadPopularBooks()
-        {
-            // For now, use the same books as recommendations
-            var books = await _bookService.GetRecommendedBooksAsync();
-            PopularBooks.Clear();
-            foreach (var book in books)
+            finally
             {
-                PopularBooks.Add(new BookViewModel(book, _bookService, _navigationService));
+                IsLoading = false;
             }
         }
 
         [RelayCommand]
-        private Task NavigateToHome()
+        private void Search()
         {
-            // Déjà sur la page d'accueil, ne rien faire
-            return Task.CompletedTask;
+            if (string.IsNullOrWhiteSpace(SearchQuery))
+            {
+                // Show all books if search is empty
+                foreach (var book in Books)
+                    book.IsVisible = true;
+                return;
+            }
+            var query = SearchQuery.ToLowerInvariant();
+            foreach (var book in Books)
+            {
+                book.IsVisible = (book.Title?.ToLowerInvariant().Contains(query) == true) ||
+                                 (book.Author?.ToLowerInvariant().Contains(query) == true);
+            }
+        }
+
+        [RelayCommand]
+        private void ClearSearch()
+        {
+            SearchQuery = string.Empty;
+            foreach (var book in Books)
+                book.IsVisible = true;
+        }
+
+        [RelayCommand]
+        private void FilterByCategory()
+        {
+            if (string.IsNullOrWhiteSpace(SelectedCategory) || SelectedCategory == "All")
+            {
+                foreach (var book in Books)
+                    book.IsVisible = true;
+                return;
+            }
+            foreach (var book in Books)
+            {
+                book.IsVisible = book.Category?.Equals(SelectedCategory, StringComparison.OrdinalIgnoreCase) == true;
+            }
+        }
+
+        [RelayCommand]
+        private async Task NavigateToHome()
+        {
+            Console.WriteLine("[HomeViewModel] NavigateToHome called");
+            await _navigationService.NavigateToAsync("Home");
         }
 
         [RelayCommand]
         private async Task NavigateToLibrary()
         {
+            Console.WriteLine("[HomeViewModel] NavigateToLibrary called");
             await _navigationService.NavigateToAsync("Library");
         }
 
         [RelayCommand]
         private async Task NavigateToProfile()
         {
+            Console.WriteLine("[HomeViewModel] NavigateToProfile called");
             await _navigationService.NavigateToAsync("Profile");
         }
-
-        [RelayCommand]
-        private async Task ViewAllRecommendations()
-        {
-            await _navigationService.NavigateToAsync("Library", new LibraryFilterOptions { Category = "Recommended" });
-        }
-
-        [RelayCommand]
-        private async Task Search()
-        {
-            if (!string.IsNullOrWhiteSpace(SearchQuery))
-            {
-                await _navigationService.NavigateToAsync("Library", new LibraryFilterOptions { SearchQuery = SearchQuery });
-                SearchQuery = string.Empty;
-            }
-        }
     }
-}
+} 

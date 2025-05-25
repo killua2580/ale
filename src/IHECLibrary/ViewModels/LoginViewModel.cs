@@ -60,15 +60,13 @@ namespace IHECLibrary.ViewModels
                 
                 if (result.Success)
                 {
-                    Console.WriteLine("Login successful, navigating to Home view");
-                    
+                    Console.WriteLine("Login successful, navigating to Library view");
                     // Clear any error message
                     ErrorMessage = string.Empty;
-                    
-                    // Ensure we navigate to the Home view
-                    Console.WriteLine("About to navigate to Home...");
-                    await _navigationService.NavigateToAsync("Home");
-                    Console.WriteLine("Navigation to Home completed");
+                    // Ensure we navigate to the Library view
+                    Console.WriteLine("About to navigate to Library...");
+                    await _navigationService.NavigateToAsync("Library");
+                    Console.WriteLine("Navigation to Library completed");
                 }
                 else
                 {
@@ -100,13 +98,11 @@ namespace IHECLibrary.ViewModels
                 if (result.Success)
                 {
                     // Add debug logging
-                    Console.WriteLine("Google login successful, navigating to Home view");
-                    
+                    Console.WriteLine("Google login successful, navigating to Library view");
                     // Clear any error message
                     ErrorMessage = string.Empty;
-                    
-                    // Navigate to Home view
-                    await _navigationService.NavigateToAsync("Home");
+                    // Navigate to Library view
+                    await _navigationService.NavigateToAsync("Library");
                 }
                 else
                 {
@@ -154,9 +150,9 @@ namespace IHECLibrary.ViewModels
                 Console.WriteLine("=== LoginViewModel.Skip() called ===");
                 ErrorMessage = string.Empty;
                 
-                Console.WriteLine("Skipping authentication and navigating to Home view");
-                await _navigationService.NavigateToAsync("Home");
-                Console.WriteLine("Skip navigation to Home completed successfully");
+                Console.WriteLine("Skipping authentication and navigating to Library view");
+                await _navigationService.NavigateToAsync("Library");
+                Console.WriteLine("Skip navigation to Library completed successfully");
             }
             catch (Exception ex)
             {

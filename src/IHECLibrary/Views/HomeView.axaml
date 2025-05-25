@@ -3,21 +3,84 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:IHECLibrary.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="1080" d:DesignHeight="720"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
              x:Class="IHECLibrary.Views.HomeView"
              x:DataType="vm:HomeViewModel"
              FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif">
   <Grid>
-    <Border Width="520" Padding="48,36" CornerRadius="36" Background="#F9F9F9" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.98">
-      <StackPanel Spacing="24" HorizontalAlignment="Center">
-        <Image Source="avares://IHECLibrary/Assets/7717267.png" Height="100" Width="100" HorizontalAlignment="Center"/>
-        <TextBlock Text="Welcome to IHEC Library" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#222"/>
-        <TextBlock Text="Access your library resources, manage your account, and more." FontSize="18" HorizontalAlignment="Center" Foreground="#555"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="18">
-          <Button Content="Sign In" Command="{Binding GoToLoginCommand}" Background="#7A8B3A" Foreground="#FFF" FontWeight="Bold" FontSize="20" Height="48" Width="160" CornerRadius="12"/>
-          <Button Content="Register" Command="{Binding GoToRegisterCommand}" Background="#A67C52" Foreground="#FFF" FontWeight="Bold" FontSize="20" Height="48" Width="160" CornerRadius="12"/>
-        </StackPanel>
+    <!-- Navigation bar -->
+    <Grid Background="#FFF9E3" Height="70" VerticalAlignment="Top" ZIndex="1000">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <!-- Logo and title -->
+      <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+        <TextBlock Text="IHEC CARTHAGE Library" FontSize="24" FontWeight="Bold" Foreground="#222"/>
       </StackPanel>
+      <!-- Navigation menu -->
+      <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button Content="Home" Command="{Binding NavigateToHomeCommand}" 
+                Background="#A67C52" Foreground="#FFF9E3" 
+                Padding="15,10" Margin="5,0" CornerRadius="20" FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif"/>
+        <Button Content="Library" Command="{Binding NavigateToLibraryCommand}" 
+                Background="Transparent" Foreground="#222" 
+                Padding="15,10" Margin="5,0" CornerRadius="20" FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif"/>
+        <Button Content="Profile" Command="{Binding NavigateToProfileCommand}" 
+                Background="Transparent" Foreground="#222" 
+                Padding="15,10" Margin="5,0" CornerRadius="20" FontFamily="Poppins, 'Segoe UI', Arial, 'Arial Rounded MT Bold', sans-serif"/>
+      </StackPanel>
+    </Grid>
+    <!-- Background image -->
+    <Image Source="avares://IHECLibrary/Assets/background page.png" Stretch="UniformToFill" Opacity="0.18"/>
+    <StackPanel VerticalAlignment="Top" Margin="0,120,0,0" HorizontalAlignment="Center" Spacing="24">
+      <TextBlock Text="{Binding UserName, StringFormat='Welcome Back {0}!'}" FontSize="36" FontWeight="Bold" Foreground="#222" HorizontalAlignment="Center"/>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+        <TextBox Width="320" Height="36" Watermark="Search books..." Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Search" Command="{Binding SearchCommand}" Height="36" Background="#A67C52" Foreground="#FFF9E3"/>
+        <Button Content="Clear" Command="{Binding ClearSearchCommand}" Height="36" Background="#F44336" Foreground="White"/>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="8">
+        <TextBlock Text="Category:" VerticalAlignment="Center" FontWeight="SemiBold" Foreground="#A67C52"/>
+        <ComboBox Width="200" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"/>
+      </StackPanel>
+    </StackPanel>
+    <StackPanel VerticalAlignment="Top" Margin="0,260,0,0" HorizontalAlignment="Center" Width="1100">
+      <TextBlock Text="Available Books" FontSize="22" FontWeight="SemiBold" Foreground="#A67C52" Margin="0,0,0,18"/>
+      <ScrollViewer Height="600">
+        <ItemsControl ItemsSource="{Binding Books}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vm:BookViewModel">
+              <Button Command="{Binding ViewDetailsCommand}" Background="Transparent" BorderThickness="0" Padding="0" Cursor="Hand" IsVisible="{Binding IsVisible}">
+                <Border Width="200" Height="320" Margin="18" CornerRadius="18" Background="#FFFDF8" BorderBrush="#E6D3B3" BorderThickness="1">
+                  <StackPanel>
+                    <Image Width="140" Height="200" Stretch="UniformToFill" HorizontalAlignment="Center"
+                           Source="{Binding CoverImage, Converter={StaticResource BookCoverFallbackConverter}, ConverterParameter='avares://IHECLibrary/Assets/book illustration.png'}"/>
+                    <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16" TextAlignment="Center" Margin="8,10,8,0" Foreground="#222"/>
+                    <TextBlock Text="{Binding Author}" FontSize="14" Foreground="#A67C52" TextAlignment="Center"/>
+                  </StackPanel>
+                </Border>
+              </Button>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </StackPanel>
+    <!-- Loading and error overlays -->
+    <Border Background="#80FFFFFF" IsVisible="{Binding IsLoading}" ZIndex="100">
+      <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <ProgressBar IsIndeterminate="True" Width="100" Height="4" Margin="0,0,0,10"/>
+        <TextBlock Text="Loading books..." FontSize="14" HorizontalAlignment="Center"/>
+      </StackPanel>
+    </Border>
+    <Border Background="#FFEBEE" CornerRadius="8" Padding="20" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotEmptyToBoolConverter}}" Margin="50" ZIndex="101">
+      <TextBlock Text="{Binding ErrorMessage}" Foreground="#D32F2F" FontSize="16"/>
     </Border>
   </Grid>
 </UserControl> 

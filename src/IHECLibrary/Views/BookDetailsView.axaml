@@ -29,9 +29,6 @@
       
       <!-- Navigation menu -->
       <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button Content="Home" Command="{Binding NavigateToHomeCommand}" 
-                Background="Transparent" Foreground="#2E74A8" 
-                Padding="15,10" Margin="5,0" CornerRadius="20"/>
         <Button Content="Library" Command="{Binding NavigateToLibraryCommand}" 
                 Background="Transparent" Foreground="#2E74A8" 
                 Padding="15,10" Margin="5,0" CornerRadius="20"/>

@@ -49,6 +49,9 @@ namespace IHECLibrary.ViewModels
         [ObservableProperty]
         private string _actionButtonBackground = "#2E74A8"; // Default blue color for action button
 
+        [ObservableProperty]
+        private bool _isVisible = true;
+
         // Common card background colors to rotate through
         private static readonly Color[] CardColors = new[]
         {
@@ -109,30 +112,16 @@ namespace IHECLibrary.ViewModels
         }
 
         // This property binds to the UI button's Command
-        public ICommand ActionCommand => ViewDetailsCommand;
+        public IRelayCommand ViewDetailsCommand => new RelayCommand(ViewDetails);
 
         private readonly IBookService _bookService;
         private readonly INavigationService? _navigationService;
 
-        [RelayCommand]
         private void ViewDetails()
         {
-            try
+            if (_navigationService != null)
             {
-                // Navigate to book details if navigation service is available
-                if (_navigationService != null)
-                {
-                    Console.WriteLine($"Navigating to BookDetails for book ID: {Id}");
-                    _navigationService.NavigateToAsync("BookDetails", Id);
-                }
-                else
-                {
-                    Console.WriteLine("Navigation service is not available");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error viewing book details: {ex.Message}");
+                _navigationService.NavigateToAsync("BookDetails", Id);
             }
         }
 

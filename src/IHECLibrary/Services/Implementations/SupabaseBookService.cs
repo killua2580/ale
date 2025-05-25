@@ -26,13 +26,13 @@ namespace IHECLibrary.Services.Implementations
             Task.Run(async () => {
                 try {
                     var testBooks = await FetchAllBooksFromDatabase();
-                    _useMockData = testBooks.Count == 0;
-                    DebugHelper.LogMessage($"Database connection test: {(_useMockData ? "Using mock data (no books found)" : $"Found {testBooks.Count} books in database")}");
+                    _useMockData = false; // FORCE REAL DATA
+                    DebugHelper.LogMessage($"[FORCED REAL DATA] Database connection test: Found {testBooks.Count} books in database");
                 }
                 catch (Exception ex) {
-                    _useMockData = true;
+                    _useMockData = false; // FORCE REAL DATA EVEN ON ERROR
                     DebugHelper.LogError("Database connection test failed", ex);
-                    DebugHelper.LogMessage("Using mock data due to database connection issues");
+                    DebugHelper.LogMessage("[FORCED REAL DATA] Using real data even if connection issues");
                 }
             });
         }
@@ -283,7 +283,7 @@ namespace IHECLibrary.Services.Implementations
             
             DebugHelper.LogMessage("Fetching all books from database");
             var books = await FetchAllBooksFromDatabase();
-            
+            DebugHelper.LogMessage($"[DEBUG] FetchAllBooksFromDatabase returned {books.Count} books");
             if (books.Count == 0)
             {
                 DebugHelper.LogMessage("No books found in database, falling back to mock data");
@@ -535,7 +535,7 @@ namespace IHECLibrary.Services.Implementations
             return Task.FromResult(false);
         }
 
-        public async Task<List<BookModel>> GetRealBooksAsync(int page = 1, int pageSize = 10, string? category = null, string? searchQuery = null)
+        public async Task<List<BookModel>> GetRealBooksAsync(int page = 1, int pageSize = 1000, string? category = null, string? searchQuery = null)
         {
             List<BookModel> allBooks;
             
@@ -551,7 +551,7 @@ namespace IHECLibrary.Services.Implementations
             {
                 allBooks = await GetAllBooksAsync();
             }
-            
+            DebugHelper.LogMessage($"[DEBUG] GetRealBooksAsync returning {allBooks.Count} books before paging");
             return allBooks.Skip((page - 1) * pageSize).Take(pageSize).ToList();
         }
 

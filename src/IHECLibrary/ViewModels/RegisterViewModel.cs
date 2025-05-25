@@ -96,12 +96,11 @@ namespace IHECLibrary.ViewModels
                 if (result.Success)
                 {
                     // Add debug logging
-                    Console.WriteLine("Registration successful, navigating to Home view");
+                    Console.WriteLine("Registration successful, navigating to Library view");
                     // Clear any error message
                     ErrorMessage = string.Empty;
-                    
-                    // Ensure we navigate to the Home view
-                    await _navigationService.NavigateToAsync("Home");
+                    // Ensure we navigate to the Library view
+                    await _navigationService.NavigateToAsync("Library");
                 }
                 else
                 {
@@ -130,7 +129,7 @@ namespace IHECLibrary.ViewModels
                 var result = await _authService.SignInWithGoogleAsync();
                 if (result.Success)
                 {
-                    await _navigationService.NavigateToAsync("Home");
+                    await _navigationService.NavigateToAsync("Library");
                 }
                 else
                 {

@@ -15,4 +15,4 @@ namespace IHECLibrary.Views
             AvaloniaXamlLoader.Load(this);
         }
     }
-}
+} 

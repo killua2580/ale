@@ -13,6 +13,8 @@
     <Application.Resources>
         <converters:BoolToColorConverter x:Key="BoolToColorConverter"/>
         <converters:BoolToStringConverter x:Key="BoolToStringConverter"/>
+        <converters:BookCoverFallbackConverter x:Key="BookCoverFallbackConverter"/>
+        <converters:StringNotEmptyToBoolConverter x:Key="StringNotEmptyToBoolConverter"/>
     </Application.Resources>
   
     <Application.Styles>

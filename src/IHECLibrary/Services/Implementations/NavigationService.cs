@@ -62,18 +62,18 @@ namespace IHECLibrary.Services.Implementations
                     "Welcome" => _serviceProvider.GetRequiredService<WelcomeViewModel>(),
                     "WhoAmI" => _serviceProvider.GetRequiredService<WhoAmIViewModel>(),
                     "Login" => _serviceProvider.GetRequiredService<LoginViewModel>(),
-                "Register" => _serviceProvider.GetRequiredService<RegisterViewModel>(),
-                "SimpleRegister" => _serviceProvider.GetRequiredService<RegisterViewModel>(), // Added SimpleRegister route
-                "AdminLogin" => _serviceProvider.GetRequiredService<AdminLoginViewModel>(),
-                "AdminRegister" => _serviceProvider.GetRequiredService<AdminRegisterViewModel>(),
-                "Home" => _serviceProvider.GetRequiredService<HomeViewModel>(),
-                "Library" => _serviceProvider.GetRequiredService<LibraryViewModel>(),
-                "Profile" => _serviceProvider.GetRequiredService<ProfileViewModel>(),
-                "EditProfile" => _serviceProvider.GetRequiredService<EditProfileViewModel>(),
-                "AdminDashboard" => _serviceProvider.GetRequiredService<AdminDashboardViewModel>(),
-                "BookDetails" => _serviceProvider.GetRequiredService<BookDetailsViewModel>(),
-                _ => throw new ArgumentException($"Vue non reconnue: {viewName}")
-            };
+                    "Register" => _serviceProvider.GetRequiredService<RegisterViewModel>(),
+                    "SimpleRegister" => _serviceProvider.GetRequiredService<RegisterViewModel>(), // Added SimpleRegister route
+                    "AdminLogin" => _serviceProvider.GetRequiredService<AdminLoginViewModel>(),
+                    "AdminRegister" => _serviceProvider.GetRequiredService<AdminRegisterViewModel>(),
+                    "Home" => _serviceProvider.GetRequiredService<HomeViewModel>(),
+                    "Library" => _serviceProvider.GetRequiredService<LibraryViewModel>(),
+                    "Profile" => _serviceProvider.GetRequiredService<ProfileViewModel>(),
+                    "EditProfile" => _serviceProvider.GetRequiredService<EditProfileViewModel>(),
+                    "AdminDashboard" => _serviceProvider.GetRequiredService<AdminDashboardViewModel>(),
+                    "BookDetails" => _serviceProvider.GetRequiredService<BookDetailsViewModel>(),
+                    _ => throw new ArgumentException($"Vue non reconnue: {viewName}")
+                };
 
                 Console.WriteLine($"NavigationService: ViewModel created: {viewModel.GetType().Name}");
 

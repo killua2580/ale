@@ -236,9 +236,9 @@ namespace IHECLibrary
             ));
             
             services.AddTransient<HomeViewModel>(provider => new HomeViewModel(
-                provider.GetRequiredService<INavigationService>(),
+                provider.GetRequiredService<IUserService>(),
                 provider.GetRequiredService<IBookService>(),
-                provider.GetRequiredService<IUserService>()
+                provider.GetRequiredService<INavigationService>()
             ));
             
             services.AddTransient<LibraryViewModel>(provider => new LibraryViewModel(

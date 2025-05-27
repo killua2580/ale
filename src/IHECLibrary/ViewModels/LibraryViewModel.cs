@@ -103,8 +103,8 @@ namespace IHECLibrary.ViewModels
 
         private void InitializeLanguages()
         {
-            Languages.Add(new LanguageViewModel { Name = "English", IsSelected = false });
-            Languages.Add(new LanguageViewModel { Name = "French", IsSelected = true });
+            Languages.Add(new LanguageViewModel { Name = "English", IsSelected = true });
+            Languages.Add(new LanguageViewModel { Name = "French", IsSelected = false });
             Languages.Add(new LanguageViewModel { Name = "Arabic", IsSelected = false });
         }
 

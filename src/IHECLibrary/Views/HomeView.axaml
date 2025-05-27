@@ -61,7 +61,7 @@
                 <Border Width="200" Height="320" Margin="18" CornerRadius="18" Background="#FFFDF8" BorderBrush="#E6D3B3" BorderThickness="1">
                   <StackPanel>
                     <Image Width="140" Height="200" Stretch="UniformToFill" HorizontalAlignment="Center"
-                           Source="{Binding CoverImage, Converter={StaticResource BookCoverFallbackConverter}, ConverterParameter='avares://IHECLibrary/Assets/book illustration.png'}"/>
+                           Source="{Binding DisplayCoverImageUrl}"/>
                     <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16" TextAlignment="Center" Margin="8,10,8,0" Foreground="#222"/>
                     <TextBlock Text="{Binding Author}" FontSize="14" Foreground="#A67C52" TextAlignment="Center"/>
                   </StackPanel>

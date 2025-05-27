@@ -3,19 +3,15 @@
     "datapilot": {
       "url": "http://localhost:7700/sse",
       "type": "sse"
-    }
-  }
-}
-"mcpServers": {
+    },
     "supabase": {
       "command": "npx",
       "args": [
         "-y",
         "@supabase/mcp-server-supabase@latest",
         "--access-token",
-        "sbp_2db150a8c892de4e3c61007b684ee16c6242e176"
+        "sbp_5961bf1159d5b440d59992b7c51da2d2733834e6"
       ]
-    },
-    "datapilot": {}
+    }
   }
 }

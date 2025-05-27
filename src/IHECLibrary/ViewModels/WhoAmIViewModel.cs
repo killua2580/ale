@@ -25,5 +25,11 @@ namespace IHECLibrary.ViewModels
         {
             await _navigationService.NavigateToAsync("AdminLogin");
         }
+
+        [RelayCommand]
+        private async Task BackToWelcome()
+        {
+            await _navigationService.NavigateToAsync("Welcome");
+        }
     }
 }

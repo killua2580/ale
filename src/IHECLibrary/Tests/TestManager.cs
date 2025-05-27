@@ -141,8 +141,8 @@ namespace IHECLibrary.Tests
             else
             {
                 // For real service implementations, we need the required parameters
-                var supabaseUrl = "https://kwsczjtdjexydcbzbpws.supabase.co";
-                var supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3c2N6anRkamV4eWRjYnpicHdzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwNjkyNzMsImV4cCI6MjA2MDY0NTI3M30.xfwy8okepbA3d0yaDCUpUXUyvKYUKR1w7SLW3gam5HM";
+                var supabaseUrl = "https://luneenvyunhuvrhpsoig.supabase.co";
+                var supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1bmVlbnZ5dW5odXZyaHBzb2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxMTE1MDAsImV4cCI6MjA2MzY4NzUwMH0.cp8UkllXYx5tt02rOcWfQR7FBNdo2sMVLFDmrn_fYhM";
                 var supabaseOptions = new SupabaseOptions
                 {
                     AutoRefreshToken = true,

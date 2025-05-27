@@ -95,22 +95,19 @@ namespace IHECLibrary.ViewModels
                 var result = await _authService.RegisterAsync(registrationModel);
                 if (result.Success)
                 {
-                    // Add debug logging
-                    Console.WriteLine("Registration successful, navigating to Library view");
-                    // Clear any error message
-                    ErrorMessage = string.Empty;
-                    // Ensure we navigate to the Library view
-                    await _navigationService.NavigateToAsync("Library");
+                    // Show a friendly message instead of navigating immediately
+                    ErrorMessage = "Your account has been registered, feel free to login.";
+                    // Optionally, clear the form fields here if desired
+                    // Email = FirstName = LastName = PhoneNumber = Password = string.Empty;
                 }
                 else
                 {
-                    ErrorMessage = result.ErrorMessage ?? "Échec de l'inscription. Veuillez réessayer.";
-                    Console.WriteLine($"Registration failed: {ErrorMessage}");
+                    ErrorMessage = "Registration failed. Please try again.";
                 }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
-                ErrorMessage = $"Une erreur s'est produite: {ex.Message}";
+                ErrorMessage = "Registration failed. Please try again.";
             }
             finally
             {

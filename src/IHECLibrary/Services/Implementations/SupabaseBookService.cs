@@ -13,14 +13,175 @@ namespace IHECLibrary.Services.Implementations
     {
         private readonly IUserService _userService;
         private readonly Supabase.Client _supabaseClient;
-        private readonly List<BookModel> _mockBooks;
-        private bool _useMockData = false;
+        private readonly List<BookModel> _mockBooks = new List<BookModel>
+        {
+            new BookModel {
+                Id = "0466c290-c23b-4116-ad5a-cbef828ede8b",
+                Title = "Consumer Behavior",
+                Author = "Leon Schiffman",
+                PublicationYear = 2020,
+                Publisher = "Pearson",
+                ISBN = "9780135204832",
+                Description = "An exploration of how consumers make decisions and how marketers can influence those decisions.",
+                CoverImageUrl = "https://images.example.com/consumer-behavior.jpg",
+                AvailableCopies = 3,
+                TotalCopies = 3,
+                LikesCount = 0,
+                Language = "English",
+                Category = "Marketing",
+                RatingAverage = 0M
+            },
+            new BookModel {
+                Id = "0d3d4c2a-dcdb-458f-b0c1-0669a408bc44",
+                Title = "Économie Politique",
+                Author = "Jean-Marie Albertini",
+                PublicationYear = 2019,
+                Publisher = "Dalloz",
+                ISBN = "9782247186841",
+                Description = "Manuel complet d'économie politique couvrant les théories classiques et contemporaines.",
+                CoverImageUrl = "https://images.example.com/economie-politique.jpg",
+                AvailableCopies = 3,
+                TotalCopies = 3,
+                LikesCount = 0,
+                Language = "French",
+                Category = "Economy",
+                RatingAverage = 0M
+            },
+            new BookModel {
+                Id = "2bff5d55-1ab3-4572-a314-5d3c3b2d7938",
+                Title = "Corporate Finance",
+                Author = "Ross, Westerfield, Jaffe",
+                PublicationYear = 2021,
+                Publisher = "McGraw-Hill",
+                ISBN = "9781260772388",
+                Description = "The comprehensive guide to corporate finance theory and practice, covering capital structure, valuation, and financial decisions.",
+                CoverImageUrl = "https://images.example.com/corporate-finance.jpg",
+                AvailableCopies = 4,
+                TotalCopies = 4,
+                LikesCount = 0,
+                Language = "English",
+                Category = "Finance",
+                RatingAverage = 0M
+            },
+            new BookModel {
+                Id = "3144b6a4-77a0-46e8-8aa8-72bc140b6ba6",
+                Title = "JavaScript: The Good Parts",
+                Author = "Douglas Crockford",
+                PublicationYear = 2020,
+                Publisher = "O'Reilly Media",
+                ISBN = "9780596517748",
+                Description = "A guide to the elegant and powerful features of JavaScript, avoiding the bad parts.",
+                CoverImageUrl = "https://images.example.com/js-good-parts.jpg",
+                AvailableCopies = 4,
+                TotalCopies = 4,
+                LikesCount = 0,
+                Language = "English",
+                Category = "IT",
+                RatingAverage = 0M
+            },
+            new BookModel {
+                Id = "39df10cd-a0de-4d00-a029-8861143e141d",
+                Title = "Financial Accounting",
+                Author = "Jerry Weygandt",
+                PublicationYear = 2021,
+                Publisher = "Wiley",
+                ISBN = "9781119594174",
+                Description = "A comprehensive introduction to financial accounting that provides students with a solid foundation in accounting principles.",
+                CoverImageUrl = "https://images.example.com/weygandt-accounting.jpg",
+                AvailableCopies = 4,
+                TotalCopies = 4,
+                LikesCount = 0,
+                Language = "English",
+                Category = "Accounting",
+                RatingAverage = 0M
+            },
+            new BookModel {
+                Id = "3a5466a3-d48c-45eb-9783-8f213640c753",
+                Title = "Management des Organisations",
+                Author = "Helène Denis",
+                PublicationYear = 2019,
+                Publisher = "Pearson",
+                ISBN = "9782326002036",
+                Description = "Une approche complète du management moderne, couvrant les théories et pratiques organisationnelles.",
+                CoverImageUrl = "https://images.example.com/management-organisations.jpg",
+                AvailableCopies = 3,
+                TotalCopies = 3,
+                LikesCount = 0,
+                Language = "French",
+                Category = "Management",
+                RatingAverage = 0M
+            },
+            new BookModel {
+                Id = "3f89201b-7b3d-47a9-a7c8-489eec7d39ed",
+                Title = "Capital in the Twenty-First Century",
+                Author = "Thomas Piketty",
+                PublicationYear = 2017,
+                Publisher = "Harvard University Press",
+                ISBN = "9780674979857",
+                Description = "A groundbreaking analysis of wealth and income inequality in the modern world.",
+                CoverImageUrl = "https://images.example.com/piketty-capital.jpg",
+                AvailableCopies = 2,
+                TotalCopies = 2,
+                LikesCount = 0,
+                Language = "English",
+                Category = "Economy",
+                RatingAverage = 0M
+            },
+            new BookModel {
+                Id = "3fa6a326-abe4-4b7d-956a-a038719c2b85",
+                Title = "Machine Learning Yearning",
+                Author = "Andrew Ng",
+                PublicationYear = 2021,
+                Publisher = "Self-Published",
+                ISBN = "9780999162729",
+                Description = "A practical guide to structuring machine learning projects and making them successful.",
+                CoverImageUrl = "https://images.example.com/ml-yearning.jpg",
+                AvailableCopies = 3,
+                TotalCopies = 3,
+                LikesCount = 0,
+                Language = "English",
+                Category = "IT",
+                RatingAverage = 0M
+            },
+            new BookModel {
+                Id = "46eb67b8-6c26-4c8d-8193-86baea80005a",
+                Title = "Cybersecurity Essentials",
+                Author = "Charles Brooks",
+                PublicationYear = 2021,
+                Publisher = "Sybex",
+                ISBN = "9781119638179",
+                Description = "A comprehensive guide to cybersecurity fundamentals, covering threats, vulnerabilities, and countermeasures.",
+                CoverImageUrl = "https://images.example.com/cybersecurity-essentials.jpg",
+                AvailableCopies = 3,
+                TotalCopies = 3,
+                LikesCount = 0,
+                Language = "English",
+                Category = "IT",
+                RatingAverage = 0M
+            },
+            new BookModel {
+                Id = "482e2867-f9d0-45a8-9a00-2f8761de81fe",
+                Title = "Brand Management",
+                Author = "Kevin Keller",
+                PublicationYear = 2020,
+                Publisher = "Pearson",
+                ISBN = "9780134167411",
+                Description = "A comprehensive guide to building, measuring, and managing brand equity in today's marketplace.",
+                CoverImageUrl = "https://images.example.com/keller-brand.jpg",
+                AvailableCopies = 3,
+                TotalCopies = 3,
+                LikesCount = 0,
+                Language = "English",
+                Category = "Marketing",
+                RatingAverage = 0M
+            }
+        };
+        private bool _useMockData = true;
 
         public SupabaseBookService(IUserService userService, Supabase.Client supabaseClient)
         {
             _userService = userService;
             _supabaseClient = supabaseClient;
-            _mockBooks = CreateMockBooks();
             
             // For testing the database connection
             Task.Run(async () => {
@@ -35,61 +196,6 @@ namespace IHECLibrary.Services.Implementations
                     DebugHelper.LogMessage("[FORCED REAL DATA] Using real data even if connection issues");
                 }
             });
-        }
-
-        private List<BookModel> CreateMockBooks()
-        {
-            return new List<BookModel>
-            {
-                new BookModel
-                {
-                    Id = "1",
-                    Title = "Principles of Finance",
-                    Author = "Mohamed Ben Salah",
-                    Description = "A comprehensive introduction to the principles of finance and their practical applications.",
-                    Category = "Finance",
-                    Language = "English",
-                    PublicationYear = 2022,
-                    TotalCopies = 5,
-                    AvailableCopies = 3,
-                    LikesCount = 42,
-                    CoverImageUrl = "https://images.unsplash.com/photo-1551651473-50be76ef2a16",
-                    ISBN = "978-0123456789",
-                    Publisher = "IHEC Press"
-                },
-                new BookModel
-                {
-                    Id = "2",
-                    Title = "Les fondements de l'investissement",
-                    Author = "Leila Trabelsi",
-                    Description = "Une analyse détaillée des stratégies d'investissement dans les marchés tunisiens.",
-                    Category = "Finance",
-                    Language = "French",
-                    PublicationYear = 2021,
-                    TotalCopies = 3,
-                    AvailableCopies = 0,
-                    LikesCount = 28,
-                    CoverImageUrl = "https://images.unsplash.com/photo-1638194125370-83a93db1acdc",
-                    ISBN = "978-0123456790",
-                    Publisher = "IHEC Press"
-                },
-                new BookModel
-                {
-                    Id = "3",
-                    Title = "Strategic Management",
-                    Author = "Amine Koubaa",
-                    Description = "Explores strategic management concepts with case studies from North African companies.",
-                    Category = "Management",
-                    Language = "English",
-                    PublicationYear = 2023,
-                    TotalCopies = 8,
-                    AvailableCopies = 5,
-                    LikesCount = 36,
-                    CoverImageUrl = "https://images.unsplash.com/photo-1531497860584-caecbfe831d4",
-                    ISBN = "978-0123456791",
-                    Publisher = "IHEC Press"
-                }
-            };
         }
 
         private async Task<List<BookModel>> FetchAllBooksFromDatabase()

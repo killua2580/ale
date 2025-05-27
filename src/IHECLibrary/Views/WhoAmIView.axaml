@@ -14,6 +14,20 @@
     <!-- Overlay for better text readability -->
     <Border Background="#50000000"/>
     
+    <!-- Back to Welcome Button -->
+    <Button Content="◀ Back to Welcome" 
+            Command="{Binding BackToWelcomeCommand}"
+            Background="Transparent"
+            Foreground="White"
+            FontWeight="Bold"
+            FontSize="18"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="30,30,0,0"
+            BorderThickness="0"
+            Cursor="Hand"
+            />
+    
     <!-- Main Content -->
     <StackPanel HorizontalAlignment="Center" 
                 VerticalAlignment="Center"

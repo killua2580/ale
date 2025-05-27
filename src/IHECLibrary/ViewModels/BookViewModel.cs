@@ -151,6 +151,8 @@ namespace IHECLibrary.ViewModels
             }
         }
 
-        public string CoverImage => string.IsNullOrEmpty(CoverImageUrl) ? "/Assets/book_cover_placeholder.png" : CoverImageUrl;
+        public string DisplayCoverImageUrl => string.IsNullOrEmpty(CoverImageUrl)
+            ? "avares://IHECLibrary/Assets/book_cover_placeholder.png"
+            : CoverImageUrl;
     }
 }
